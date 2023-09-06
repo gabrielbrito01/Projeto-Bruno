@@ -1,11 +1,10 @@
-const Promotion = require('../models/Promotion');
-const User = require('../models/User');
+const Promotion = require('../models/promotionModel');
+const User = require('../models/userModel');
 
 exports.getPromotionsByUser = async (req, res) => {
   const userId = req.params.userId;
 
   try {
-
     const user = await User.findById(userId);
 
     if (!user) {
