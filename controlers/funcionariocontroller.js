@@ -1,4 +1,4 @@
-const Employee = require('../models/Employee');
+const employee = require('../models/employeeModel');
 
 exports.createEmployee = async (req, res) => {
     try {
@@ -10,8 +10,8 @@ exports.createEmployee = async (req, res) => {
       res.status(500).json({ error: 'Erro ao criar o funcionário' });
     }
   };
-
-exports.getAllEmployees = async (req, res) => {
+  
+  exports.getAllEmployees = async (req, res) => {
     try {
       const employees = await Employee.find();
       res.json(employees);
@@ -19,7 +19,7 @@ exports.getAllEmployees = async (req, res) => {
       res.status(500).json({ error: 'Erro ao listar os funcionários' });
     }
   };
-
+  
   exports.getEmployeeById = async (req, res) => {
     const employeeId = req.params.id;
     try {
@@ -50,7 +50,7 @@ exports.updateEmployee = async (req, res) => {
       res.status(500).json({ error: 'Erro ao atualizar o funcionário' });
     }
   };
-  
+
 exports.deleteEmployee = async (req, res) => {
     const employeeId = req.params.id;
     try {
@@ -63,5 +63,3 @@ exports.deleteEmployee = async (req, res) => {
       res.status(500).json({ error: 'Erro ao excluir o funcionário' });
     }
   };
-
-  
