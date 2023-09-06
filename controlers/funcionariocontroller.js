@@ -1,15 +1,15 @@
 const Employee = require('../models/Employee');
 
-exports.createFuncionario = async (req, res) => {
-  try {
-    const { username, password, role } = req.body;
-    const funcionario = new funcionario({ username, password, role });
-    await funcionario.save();
-    res.status(201).json({ message: 'Funcionário registrado com sucesso!' });
-  } catch (err) {
-    res.status(500).json({ error: 'Erro ao registrar funcionário!' });
-  }
-}
+exports.createEmployee = async (req, res) => {
+    try {
+      const { name, cpf, age } = req.body;
+      const employee = new Employee({ name, cpf, age });
+      await employee.save();
+      res.status(201).json({ message: 'Funcionário registrado com sucesso!', employee });
+    } catch (err) {
+      res.status(500).json({ error: 'Erro ao criar o funcionário' });
+    }
+  };
 
 exports.getAllEmployees = async (req, res) => {
     try {
