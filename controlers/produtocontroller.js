@@ -1,5 +1,4 @@
-const Product = require('../models/Product');
-
+const Product = require('../models/productModel');
 
 exports.createProduct = async (req, res) => {
   try {
@@ -19,8 +18,8 @@ exports.getAllProducts = async (req, res) => {
     } catch (err) {
       res.status(500).json({ error: 'Erro ao listar os produtos' });
     }
-  }
-  
+  };
+
   exports.getProductById = async (req, res) => {
     const productId = req.params.id;
     try {
@@ -32,7 +31,7 @@ exports.getAllProducts = async (req, res) => {
     } catch (err) {
       res.status(500).json({ error: 'Erro ao recuperar o produto' });
     }
-  }
+  };
 
 exports.updateProduct = async (req, res) => {
     const productId = req.params.id;
@@ -46,7 +45,7 @@ exports.updateProduct = async (req, res) => {
     } catch (err) {
       res.status(500).json({ error: 'Erro ao atualizar o produto' });
     }
-  }
+  };
 
 exports.deleteProduct = async (req, res) => {
     const productId = req.params.id;
@@ -59,27 +58,24 @@ exports.deleteProduct = async (req, res) => {
     } catch (err) {
       res.status(500).json({ error: 'Erro ao excluir o produto' });
     }
-  }
-  
-  exports.updateProductsByType = async (req, res) => {
-    const { type } = req.params;
-    const { discount } = req.body;
-  
-    try {
-
-      const productsToUpdate = await Product.updateMany(
-        { type },
-        { $set: { discount } }
-      );
-  
-      if (productsToUpdate.nModified === 0) {
-        return res.status(404).json({ error: 'Nenhum produto do tipo especificado encontrado' });
-      }
-  
-      res.json({ message: 'Produtos atualizados com sucesso!' });
-    } catch (err) {
-      res.status(500).json({ error: 'Erro ao atualizar produtos em lote' });
-    }
   };
 
+exports.updateProductsByType = async (req, res) => {
+  const { type } = req.params;
+  const { discount } = req.body;
 
+  try {
+    const productsToUpdate = await Product.updateMany(
+      { type },
+      { $set: { discount } }
+    );
+
+    if (productsToUpdate.nModified === 0) {
+      return res.status(404).json({ error: 'Nenhum produto do tipo especificado encontrado' });
+    }
+
+    res.json({ message: 'Produtos atualizados com sucesso!' });
+  } catch (err) {
+    res.status(500).json({ error: 'Erro ao atualizar produtos em lote' });
+  }
+};
