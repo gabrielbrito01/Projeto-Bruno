@@ -22,7 +22,7 @@ exports.authenticateUser = async (req, res) => {
     const client = await User.findOne({ username, password, role: 'client' });
 
     if (client) {
-      const token = jwt.sign({ userId: client._id, role: 'client' }, '1234', {
+      const token = jwt.sign({ userId: client._id, role: 'client' }, 'askodkasdaks', {
         expiresIn: '1h',
       });
       return res.json({ token });
@@ -36,13 +36,13 @@ exports.authenticateUser = async (req, res) => {
 
 exports.createUser = async (req, res) => {
   try {
-    const { username, password, role } = req.body;
+    const {username,password,role} = req.body;
 
     if (!username || !password || !role) {
       return res.status(400).json({ error: 'Todos os campos são obrigatórios: username, password, role' });
     }
 
-    const existingUser = await User.findOne({ username });
+    const existingUser = await User.findOne({username });
 
     if (existingUser) {
       return res.status(409).json({ error: 'Nome de usuário já está em uso' });
@@ -87,7 +87,7 @@ exports.getUserById = async (req, res) => {
 exports.updateUser = async (req, res) => {
   const userId = req.params.id;
   try {
-    const { username, password, role } = req.body;
+    const {username, password, role} = req.body;
     const user = await User.findByIdAndUpdate(userId, { username, password, role }, { new: true });
     if (!user) {
       return res.status(404).json({ error: 'Usuário não encontrado' });
@@ -110,10 +110,3 @@ exports.deleteUser = async (req, res) => {
     res.status(500).json({ error: 'Erro ao excluir o usuário' });
   }
 };
-
-
-
-  
-  
-
-
