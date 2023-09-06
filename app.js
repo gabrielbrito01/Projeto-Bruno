@@ -7,15 +7,18 @@ require('dotenv').config();
 
 const secretKey = process.env.SECRET_KEY;
 
-mongoose.connect('mongodb://localhost:27017/projetobruno', {
+mongoose.connect('mongodb://localhost:27017', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
+app.use(express.json());
+
 app.get('/', (req, res) => {
-    res.send('Bem-vindo!');
+    res.send('Bem-vindo ao Supermercado API!');
   });
 
+  
 const userRoutes = require('./routes/userRoutes');
 app.use('/users', userRoutes);
 
