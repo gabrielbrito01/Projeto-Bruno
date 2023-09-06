@@ -22,7 +22,7 @@ exports.authenticateUser = async (req, res) => {
     const client = await User.findOne({ username, password, role: 'client' });
 
     if (client) {
-      const token = jwt.sign({ userId: client._id, role: 'client' }, 'askodkasdaks', {
+      const token = jwt.sign({ userId: client._id, role: 'client' }, '1234', {
         expiresIn: '1h',
       });
       return res.json({ token });
