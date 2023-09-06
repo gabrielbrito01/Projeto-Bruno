@@ -7,7 +7,7 @@ require('dotenv').config();
 
 const secretKey = process.env.SECRET_KEY;
 
-mongoose.connect('mongodb://localhost:27017', {
+mongoose.connect('mongodb://localhost:27017/projetobruno', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
